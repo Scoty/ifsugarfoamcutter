@@ -4,6 +4,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import ifsugarfoamcutter.composeapp.generated.resources.Res
+import ifsugarfoamcutter.composeapp.generated.resources.logo
+import org.jetbrains.compose.resources.painterResource
 
 fun main() = application {
     val windowState = rememberWindowState(width = 600.dp, height = 550.dp)
@@ -12,8 +15,9 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "IfSugar Foam Cutter",
         state = windowState,
-        resizable = false // <--- prevent resizing
+        resizable = false, // <--- prevent resizing
+        icon = painterResource(Res.drawable.logo) // <-- Set your icon here
     ) {
-        App() // your main Composable
+        App()
     }
 }

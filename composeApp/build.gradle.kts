@@ -38,8 +38,14 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "studio.ifsugar.ifsugarfoamcutter"
+            packageName = "If Sugar Foam Cutter"
             packageVersion = "1.1.0"
+            windows {
+                iconFile.set(project.file("src/jvmMain/resources/ifsugar.ico"))
+            }
+            macOS {
+                iconFile.set(project.file("src/jvmMain/resources/ifsugar.icns"))
+            }
         }
     }
 }
