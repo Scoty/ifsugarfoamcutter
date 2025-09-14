@@ -40,7 +40,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "If Sugar Foam Cutter"
-            packageVersion = "1.3.0"
+            packageVersion = "1.3.1"
             windows {
                 iconFile.set(project.file("src/jvmMain/resources/ifsugar.ico"))
             }

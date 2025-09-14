@@ -13,10 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import ifsugarfoamcutter.composeapp.generated.resources.Res
 import ifsugarfoamcutter.composeapp.generated.resources.logo
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.skiko.hostId
 import studio.ifsugar.ifsugarfoamcutter.file.SortedFileSystemView
 import studio.ifsugar.ifsugarfoamcutter.file.TapFileFilter
 import studio.ifsugar.ifsugarfoamcutter.file.TapFileProcessor
@@ -71,6 +73,7 @@ fun App() {
                     text = "Choose .tap File",
                     colors = listOf(Color(0xFF4A90E2), Color(0xFF357ABD)),
                     onClick = {
+                        statusMessage = ""
                         val chooser = JFileChooser(
                             lastDirectory ?: File(System.getProperty("user.home")),
                             SortedFileSystemView(FileSystemView.getFileSystemView())
