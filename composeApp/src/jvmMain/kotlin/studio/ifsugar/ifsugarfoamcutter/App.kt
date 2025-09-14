@@ -176,20 +176,28 @@ fun App() {
                             val points = gcodePath!!.points
 
                             if (points.isNotEmpty()) {
-                                // Normalize points to fit canvas
+                                // Normalize bounds
                                 val minX = points.minOf { it.first }
                                 val maxX = points.maxOf { it.first }
                                 val minY = points.minOf { it.second }
                                 val maxY = points.maxOf { it.second }
 
-                                val scaleX = size.width / (maxX - minX).coerceAtLeast(1f)
-                                val scaleY = size.height / (maxY - minY).coerceAtLeast(1f)
+                                val pathWidth = (maxX - minX).coerceAtLeast(1f)
+                                val pathHeight = (maxY - minY).coerceAtLeast(1f)
+
+                                // Scale to fit canvas
+                                val scaleX = size.width / pathWidth
+                                val scaleY = size.height / pathHeight
                                 val scale = minOf(scaleX, scaleY)
+
+                                // Compute center offset
+                                val offsetX = (size.width - pathWidth * scale) / 2f
+                                val offsetY = (size.height - pathHeight * scale) / 2f
 
                                 var last: Offset? = null
                                 points.forEach { (x, y) ->
-                                    val px = (x - minX) * scale
-                                    val py = size.height - (y - minY) * scale // flip Y
+                                    val px = (x - minX) * scale + offsetX
+                                    val py = size.height - ((y - minY) * scale + offsetY) // flip Y, keep centered
                                     val current = Offset(px, py)
 
                                     if (last != null) {
