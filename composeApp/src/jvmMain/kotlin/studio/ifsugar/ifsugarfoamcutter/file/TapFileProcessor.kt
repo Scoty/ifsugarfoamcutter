@@ -2,6 +2,8 @@ package studio.ifsugar.ifsugarfoamcutter.file
 
 import java.io.File
 
+data class GCodePath(val points: List<Pair<Float, Float>>)
+
 class TapFileProcessor {
 
     /**
@@ -14,9 +16,9 @@ class TapFileProcessor {
      * @param inputFile The original .tap file
      * @param feedRate  The feed rate value (from slider)
      * @param power     The power value (from slider)
-     * @return The newly generated processed file
+     * @return The newly generated processed file and a text representation of it
      */
-    fun processFile(inputFile: File, feedRate: Int, power: Int): File {
+    fun processFile(inputFile: File, feedRate: Int, power: Int): Pair<File, String> {
         require(inputFile.exists() && inputFile.isFile) {
             "Input file does not exist: ${inputFile.path}"
         }
@@ -49,7 +51,7 @@ class TapFileProcessor {
         outputFile.writeText("$prefix\n")
         outputFile.appendText(processedLines.joinToString("\n"))
         outputFile.appendText("\n$suffix\n")
-        return outputFile
+        return outputFile to processedLines.joinToString("\n")
     }
 
     val suffix = """
@@ -59,4 +61,19 @@ class TapFileProcessor {
         M2
         (EOF)
     """.trimIndent()
+
+    fun extractPath(gcodeText: String): GCodePath {
+        val points = mutableListOf<Pair<Float, Float>>()
+        val regex = Regex("""X([-]?\d+\.?\d*)\s*Y([-]?\d+\.?\d*)""")
+
+        gcodeText.lines().forEach { line ->
+            val match = regex.find(line)
+            if (match != null) {
+                val x = match.groupValues[1].toFloat()
+                val y = match.groupValues[2].toFloat()
+                points.add(x to y)
+            }
+        }
+        return GCodePath(points)
+    }
 }

@@ -13,7 +13,7 @@ import java.awt.Toolkit
 
 fun main() = application {
     val windowState = rememberWindowState(width = 600.dp,
-        height = 550.dp,
+        height = 900.dp,
         position = WindowPosition.Aligned(
             alignment = androidx.compose.ui.Alignment.Center
         ))
