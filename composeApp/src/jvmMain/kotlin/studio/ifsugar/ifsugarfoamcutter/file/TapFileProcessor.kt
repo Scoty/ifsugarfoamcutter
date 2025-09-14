@@ -36,11 +36,13 @@ class TapFileProcessor {
                 .toList()
         }
 
-        val prefix = """
-            M3 S$power
+        val prefix = $$"""
+            G4 P1 (Wait 1 seconds)
+            $H
+            M3 S$$power
             G4 P5 (Wait 5 seconds)
             G21 (All units in mm)
-            G1 F$feedRate
+            G1 F$$feedRate
             (Start Cutting GCODE)
         """.trimIndent()
 
