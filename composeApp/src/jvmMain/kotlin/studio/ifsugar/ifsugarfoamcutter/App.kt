@@ -164,7 +164,7 @@ fun App() {
                         color = Color.White,
                         style = defaultTextStyle
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(25.dp))
                     if (gcodePath != null) {
                         Canvas(modifier = Modifier.fillMaxSize()) {
                             val points = gcodePath!!.points
@@ -199,7 +199,7 @@ fun App() {
                                             color = Color.Green,
                                             start = last!!,
                                             end = current,
-                                            strokeWidth = 2f
+                                            strokeWidth = 3f
                                         )
                                     }
                                     last = current
