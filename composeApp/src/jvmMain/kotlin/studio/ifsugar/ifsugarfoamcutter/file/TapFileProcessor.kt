@@ -11,7 +11,7 @@ class TapFileProcessor {
      * - Removes the first 7 characters of each line,
      * - Keeps only lines containing "G1" (case-sensitive),
      * - Skips empty/blank lines,
-     * - Appends feedRate and power information to each line.
+     * - Appends header and footer to the processed lines.
      *
      * @param inputFile The original .tap file
      * @param feedRate  The feed rate value (from slider)

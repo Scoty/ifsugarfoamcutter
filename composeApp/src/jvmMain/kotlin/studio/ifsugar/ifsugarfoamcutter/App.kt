@@ -5,9 +5,7 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
@@ -17,12 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import ifsugarfoamcutter.composeapp.generated.resources.Res
 import ifsugarfoamcutter.composeapp.generated.resources.logo
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.skiko.hostId
 import studio.ifsugar.ifsugarfoamcutter.file.GCodePath
 import studio.ifsugar.ifsugarfoamcutter.file.SortedFileSystemView
 import studio.ifsugar.ifsugarfoamcutter.file.TapFileFilter
@@ -44,7 +40,6 @@ fun App() {
     var power by remember { mutableStateOf(1000f) }
     var lastDirectory by remember { mutableStateOf<File?>(null) }
     var statusMessage by remember { mutableStateOf("") }
-    var gcodePreview by remember { mutableStateOf("") }
     var gcodePath by remember { mutableStateOf<GCodePath?>(null) }
 
     MaterialTheme(colorScheme = darkColorScheme()) {
@@ -135,7 +130,6 @@ fun App() {
                                     feedRate.toInt(),
                                     power.toInt()
                                 )
-                                gcodePreview = previewText
                                 gcodePath = processor.extractPath(previewText)
                                 statusMessage = "Processed file saved: ${newFile.name}"
                             } catch (e: Exception) {
@@ -168,7 +162,7 @@ fun App() {
                     Text(
                         "G-code Preview (2D Path):",
                         color = Color.White,
-                        style = MaterialTheme.typography.titleMedium
+                        style = defaultTextStyle
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     if (gcodePath != null) {

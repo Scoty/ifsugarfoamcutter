@@ -40,15 +40,15 @@ fun GradientButton(
     colors: List<Color>,
     onClick: () -> Unit,
     modifier: Modifier = Modifier.Companion,
-    fixedWidth: Dp = Dp.Companion.Unspecified // width wraps content if unspecified
+    fixedWidth: Dp = Dp.Unspecified // width wraps content if unspecified
 ) {
-    val brush = Brush.Companion.horizontalGradient(colors)
+    val brush = Brush.horizontalGradient(colors)
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered by interactionSource.collectIsHoveredAsState()
 
     Box(
         modifier = modifier
-            .then(if (fixedWidth != Dp.Companion.Unspecified) Modifier.Companion.width(fixedWidth) else Modifier.Companion)
+            .then(if (fixedWidth != Dp.Unspecified) Modifier.width(fixedWidth) else Modifier.Companion)
             .shadow(
                 elevation = if (isHovered) 20.dp else 4.dp,
                 shape = RoundedCornerShape(12.dp)
@@ -61,9 +61,9 @@ fun GradientButton(
                 indication = null
             ) { onClick() }
             .padding(horizontal = 20.dp, vertical = 12.dp),
-        contentAlignment = Alignment.Companion.Center
+        contentAlignment = Alignment.Center
     ) {
-        Text(text = text, color = Color.Companion.White, fontSize = 16.sp)
+        Text(text = text, color = Color.White, fontSize = 16.sp)
     }
 }
 
@@ -95,16 +95,16 @@ fun GlowingSlider(
         colors = SliderDefaults.colors(
             thumbColor = thumbColor,
             activeTrackColor = trackColor,
-            inactiveTrackColor = Color.Companion.Gray.copy(alpha = 0.3f)
+            inactiveTrackColor = Color.Gray.copy(alpha = 0.3f)
         )
     )
 }
 
 val defaultTextStyle = TextStyle(
-    color = Color.Companion.White,
+    color = Color.White,
     fontSize = 16.sp,
     shadow = Shadow(
-        color = Color.Companion.Black.copy(alpha = 0.6f),
+        color = Color.Black.copy(alpha = 0.6f),
         offset = Offset(2f, 2f),
         blurRadius = 4f
     )
@@ -133,7 +133,7 @@ fun ColorfulBackground(modifier: Modifier = Modifier.Companion) {
     )
 
     Canvas(modifier = modifier.fillMaxSize()) {
-        val gradient = Brush.Companion.linearGradient(
+        val gradient = Brush.linearGradient(
             colors = listOf(
                 Color(0xFF3F51B5),
                 Color(0xFF2196F3),
@@ -150,7 +150,7 @@ fun ColorfulBackground(modifier: Modifier = Modifier.Companion) {
 
         // Optional: subtle grid lines on top
         val step = 30f
-        val lineColor = Color.Companion.White.copy(alpha = 0.05f)
+        val lineColor = Color.White.copy(alpha = 0.05f)
         var x = 0f
         while (x < size.width) {
             drawLine(lineColor, Offset(x, 0f), Offset(x - size.width, size.height))
