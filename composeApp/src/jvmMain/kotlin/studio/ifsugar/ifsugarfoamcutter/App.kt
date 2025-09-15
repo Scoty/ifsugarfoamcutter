@@ -199,7 +199,7 @@ fun App() {
                                             color = Color.Green,
                                             start = last!!,
                                             end = current,
-                                            strokeWidth = 3f
+                                            strokeWidth = 2f
                                         )
                                     }
                                     last = current
