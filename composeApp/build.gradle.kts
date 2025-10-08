@@ -27,7 +27,8 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
-//            implementation("com.formdev:flatlaf:3.6.1") waiting for version 3.7  to replace JFileChooser with SystemFileChooser
+            //waiting for version 3.7 to replace JFileChooser with SystemFileChooser
+            implementation(fileTree("src/jvmMain/resources/libs"))
         }
     }
 }
@@ -40,7 +41,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "If Sugar Foam Cutter"
-            packageVersion = "2.1.3"
+            packageVersion = "2.2"
             windows {
                 iconFile.set(project.file("src/jvmMain/resources/ifsugar.ico"))
             }

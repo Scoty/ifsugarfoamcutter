@@ -5,11 +5,13 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import com.formdev.flatlaf.FlatLightLaf
 import ifsugarfoamcutter.composeapp.generated.resources.Res
 import ifsugarfoamcutter.composeapp.generated.resources.logo
 import org.jetbrains.compose.resources.painterResource
 
 fun main() = application {
+    FlatLightLaf.setup()
     val windowState = rememberWindowState(width = 600.dp,
         height = 900.dp,
         position = WindowPosition.Aligned(

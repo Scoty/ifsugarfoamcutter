@@ -4,6 +4,7 @@ import java.io.File
 import javax.swing.filechooser.FileSystemView
 
 // FileSystemView that filters to directories + .tap files and sorts by lastModified desc
+// Not used currently as SystemFileChooser doesn't support it
 class SortedFileSystemView(private val delegate: FileSystemView) : FileSystemView() {
     override fun createNewFolder(containingDir: File?): File = delegate.createNewFolder(containingDir)
     override fun getHomeDirectory(): File = delegate.homeDirectory
