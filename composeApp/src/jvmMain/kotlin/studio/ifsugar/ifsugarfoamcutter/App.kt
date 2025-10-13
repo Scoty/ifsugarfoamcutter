@@ -17,11 +17,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.formdev.flatlaf.util.SystemFileChooser
+import com.formdev.flatlaf.util.SystemFileChooser.setStateStore
 import ifsugarfoamcutter.composeapp.generated.resources.Res
 import ifsugarfoamcutter.composeapp.generated.resources.logo
 import org.jetbrains.compose.resources.painterResource
 import studio.ifsugar.ifsugarfoamcutter.file.GCodePath
 import studio.ifsugar.ifsugarfoamcutter.file.TapFileProcessor
+import studio.ifsugar.ifsugarfoamcutter.state.PreferencesStateStore
 import studio.ifsugar.ifsugarfoamcutter.style.ColorfulBackground
 import studio.ifsugar.ifsugarfoamcutter.style.GlowingSlider
 import studio.ifsugar.ifsugarfoamcutter.style.GradientButton
@@ -35,7 +37,6 @@ fun App() {
     var selectedFile by remember { mutableStateOf<File?>(null) }
     var feedRate by remember { mutableStateOf(1000f) }
     var power by remember { mutableStateOf(1000f) }
-    var lastDirectory by remember { mutableStateOf<File?>(null) }
     var statusMessage by remember { mutableStateOf("") }
     var gcodePath by remember { mutableStateOf<GCodePath?>(null) }
 
@@ -74,16 +75,14 @@ fun App() {
                     onClick = {
                         statusMessage = ""
                         gcodePath = null
-                        val chooser = SystemFileChooser(
-                            lastDirectory ?: File(System.getProperty("user.home"))
-                        ).apply {
+                        val chooser = SystemFileChooser().apply {
                             isAcceptAllFileFilterUsed = false
                             addChoosableFileFilter(SystemFileChooser.FileNameExtensionFilter("Tap files", "tap"))
+                            setStateStore(PreferencesStateStore())
                         }
 
                         if (chooser.showOpenDialog(null) == SystemFileChooser.APPROVE_OPTION) {
                             selectedFile = chooser.selectedFile
-                            lastDirectory = chooser.selectedFile.parentFile
                         }
                     },
                     modifier = Modifier.padding(vertical = 8.dp)
