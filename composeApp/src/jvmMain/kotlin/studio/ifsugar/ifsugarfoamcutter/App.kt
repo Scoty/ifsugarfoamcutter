@@ -113,8 +113,8 @@ fun App() {
                         onValueChange = { power = it },
                         valueRange = 200f..1500f,
                         steps = 12,
-                        thumbColor = Color(0xfff37016),
-                        trackColor = Color(0xfff37016),
+                        thumbColor = Color(0xffec1d26),
+                        trackColor = Color(0xffec1d26),
                         modifier = Modifier.width(300.dp)
                     )
                 }

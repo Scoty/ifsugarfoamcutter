@@ -20,7 +20,7 @@ fun main() = application {
 
     Window(
         onCloseRequest = ::exitApplication,
-        title = "If Sugar Foam Cutter v2.3.1",
+        title = "If Sugar Foam Cutter v2.3.2",
         state = windowState,
         resizable = false, // <--- prevent resizing
         icon = painterResource(Res.drawable.logo) // <-- Set your icon here
