@@ -12,6 +12,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -19,12 +20,12 @@ import androidx.compose.ui.unit.dp
 import com.formdev.flatlaf.util.SystemFileChooser
 import com.formdev.flatlaf.util.SystemFileChooser.setStateStore
 import ifsugarfoamcutter.composeapp.generated.resources.Res
+import ifsugarfoamcutter.composeapp.generated.resources.background
 import ifsugarfoamcutter.composeapp.generated.resources.logo
 import org.jetbrains.compose.resources.painterResource
 import studio.ifsugar.ifsugarfoamcutter.file.GCodePath
 import studio.ifsugar.ifsugarfoamcutter.file.TapFileProcessor
 import studio.ifsugar.ifsugarfoamcutter.state.PreferencesStateStore
-import studio.ifsugar.ifsugarfoamcutter.style.ColorfulBackground
 import studio.ifsugar.ifsugarfoamcutter.style.GlowingSlider
 import studio.ifsugar.ifsugarfoamcutter.style.GradientButton
 import studio.ifsugar.ifsugarfoamcutter.style.defaultTextStyle
@@ -44,10 +45,14 @@ fun App() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFF121212))
         ) {
-            ColorfulBackground(modifier = Modifier.fillMaxSize())
-
+            // 🖼 Background SVG
+            Image(
+                painter = painterResource(Res.drawable.background),
+                contentDescription = "App Background",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.fillMaxSize()
+            )
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(10.dp), // spacing between elements
@@ -59,7 +64,7 @@ fun App() {
                     contentDescription = "Logo",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .size(140.dp)
+                        .size(150.dp)
                         .background(Color.Transparent)
                 )
 
@@ -71,7 +76,7 @@ fun App() {
 
                 GradientButton(
                     text = "Choose .tap File",
-                    colors = listOf(Color(0xFF4A90E2), Color(0xFF357ABD)),
+                    colors = listOf(Color(0xff4075b4), Color(0xff303a86)),
                     onClick = {
                         statusMessage = ""
                         gcodePath = null
@@ -95,8 +100,8 @@ fun App() {
                         onValueChange = { feedRate = it },
                         valueRange = 100f..1000f,
                         steps = 8,
-                        thumbColor = Color.Cyan,
-                        trackColor = Color.Cyan,
+                        thumbColor = Color(0xfff4d515),
+                        trackColor = Color(0xfff4d515),
                         modifier = Modifier.width(300.dp)
                     )
                 }
@@ -108,8 +113,8 @@ fun App() {
                         onValueChange = { power = it },
                         valueRange = 200f..1500f,
                         steps = 12,
-                        thumbColor = Color.Magenta,
-                        trackColor = Color.Magenta,
+                        thumbColor = Color(0xfff37016),
+                        trackColor = Color(0xfff37016),
                         modifier = Modifier.width(300.dp)
                     )
                 }
@@ -161,8 +166,13 @@ fun App() {
                         style = defaultTextStyle
                     )
                     Spacer(modifier = Modifier.height(25.dp))
-                    if (gcodePath != null) {
-                        Canvas(modifier = Modifier.fillMaxSize()) {
+
+                    Canvas(modifier = Modifier
+                        .fillMaxSize()
+                        .shadow(2.dp)
+                        .padding(top = 12.dp, bottom = 12.dp)
+                    ) {
+                        if (gcodePath != null) {
                             val points = gcodePath!!.points
 
                             if (points.isNotEmpty()) {

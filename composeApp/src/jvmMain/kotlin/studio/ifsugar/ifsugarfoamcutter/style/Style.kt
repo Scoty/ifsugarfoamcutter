@@ -1,14 +1,11 @@
 package studio.ifsugar.ifsugarfoamcutter.style
 
-import androidx.compose.animation.core.*
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -109,57 +106,3 @@ val defaultTextStyle = TextStyle(
         blurRadius = 4f
     )
 )
-
-@Composable
-fun ColorfulBackground(modifier: Modifier = Modifier.Companion) {
-    // Animate gradient offset for subtle movement
-    val infiniteTransition = rememberInfiniteTransition()
-    val offsetX by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 300f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(8000, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-
-    val offsetY by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 300f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(10000, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-
-    Canvas(modifier = modifier.fillMaxSize()) {
-        val gradient = Brush.linearGradient(
-            colors = listOf(
-                Color(0xFF3F51B5),
-                Color(0xFF2196F3),
-                Color(0xFF00BCD4),
-                Color(0xFF4CAF50),
-                Color(0xFFFFC107),
-                Color(0xFFF44336)
-            ),
-            start = Offset(offsetX, offsetY),
-            end = Offset(size.width + offsetX, size.height + offsetY)
-        )
-
-        drawRect(brush = gradient, size = size)
-
-        // Optional: subtle grid lines on top
-        val step = 30f
-        val lineColor = Color.White.copy(alpha = 0.05f)
-        var x = 0f
-        while (x < size.width) {
-            drawLine(lineColor, Offset(x, 0f), Offset(x - size.width, size.height))
-            x += step
-        }
-        var y = 0f
-        while (y < size.height) {
-            drawLine(lineColor, Offset(0f, y), Offset(size.width, y - size.height))
-            y += step
-        }
-    }
-}

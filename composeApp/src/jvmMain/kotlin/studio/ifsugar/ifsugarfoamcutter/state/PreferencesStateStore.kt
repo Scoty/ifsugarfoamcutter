@@ -3,9 +3,8 @@ package studio.ifsugar.ifsugarfoamcutter.state
 import com.formdev.flatlaf.util.SystemFileChooser
 import java.util.prefs.Preferences
 
-
+const val KEY_PREFIX: String = "fileChooser.openDialog"
 class PreferencesStateStore : SystemFileChooser.StateStore {
-    val KEY_PREFIX: String = "fileChooser.openDialog"
 
     private val state: Preferences? = Preferences.userRoot().node("if-sugar-foam-cutter")
     override fun get(key: String?, def: String?): String? {
