@@ -61,7 +61,7 @@ N05050
 ### Output `.gcode` file
 
 Located at:
-`/composeApp/src/jvmTest/resources/file/output.dcode`
+`/composeApp/src/jvmTest/resources/file/output.gcode`
 
 Example:
 
@@ -81,7 +81,7 @@ G1 X207.76 Y37.87
 G1 X207.76 Y37.87
 G1 X221.15 Y37.87
 G1 X267.04 Y37.87
-# instuctions skipped for readibily
+(instuctions skipped for readibily)
 G1 X419.69 Y460.59
 G1 X419.69 Y460.59
 G1 X406.59 Y458.63
@@ -155,7 +155,7 @@ composeApp/build/compose/binaries/main-release/dmg/
 ### 🐧 Linux – Create .deb or .rpm
 
 For Debian/Ubuntu:
-```
+```bash
 ./gradlew packageDeb
 ```
 
@@ -165,7 +165,7 @@ composeApp/build/compose/binaries/main-release/deb/
 ```
 
 For Fedora/openSUSE:
-```
+```bash
 ./gradlew packageRpm
 ```
 
@@ -196,7 +196,8 @@ if-sugar-foam-cutter/
 
 ## 🧠 License
 
-MIT License © 2025
+[MIT License © 2025](LICENSE)
+
 Created by **Scoty** — powered by Kotlin & Compose Multiplatform.
 
 ---
