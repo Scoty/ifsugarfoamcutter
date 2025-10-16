@@ -64,7 +64,7 @@ fun App() {
                     contentDescription = "Logo",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .size(150.dp)
+                        .height(140.dp)
                         .background(Color.Transparent)
                 )
 
@@ -75,7 +75,7 @@ fun App() {
                 )
 
                 GradientButton(
-                    text = "Choose .tap File",
+                    text = "Choose tap file",
                     colors = listOf(Color(0xff4075b4), Color(0xff303a86)),
                     onClick = {
                         statusMessage = ""
@@ -150,14 +150,16 @@ fun App() {
                         else Color.Green
                     Text(statusMessage, color = color, style = defaultTextStyle)
                 } else {
-                    Text("")
+                    Text("Open the tap file you want to convert and press Save",
+                        color = Color.LightGray,
+                        style = defaultTextStyle )
                 }
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(300.dp)
+                        .fillMaxHeight()
                         .padding(12.dp)
                 ) {
                     Text(
@@ -165,12 +167,12 @@ fun App() {
                         color = Color.White,
                         style = defaultTextStyle
                     )
-                    Spacer(modifier = Modifier.height(25.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
                     Canvas(modifier = Modifier
                         .fillMaxSize()
                         .shadow(2.dp)
-                        .padding(top = 12.dp, bottom = 12.dp)
+                        .padding(12.dp)
                     ) {
                         if (gcodePath != null) {
                             val points = gcodePath!!.points
